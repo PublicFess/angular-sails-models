@@ -1,0 +1,41 @@
+{
+  "name": "angular-sails-models",
+  "version": "0.0.0",
+  "description": "Angular models for work with sails and sails sockets",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PublicFess/angular-sails-models.git"
+  },
+  "keywords": [
+    "angular",
+    "models",
+    "sails"
+  ],
+  "author": "Nikita Shuklin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PublicFess/angular-sails-models/issues"
+  },
+  "homepage": "https://github.com/PublicFess/angular-sails-models#readme",
+  "dependencies": {
+    "lodash.isequal": "^4.1.0",
+    "sails": "^0.12.1",
+    "sails.io.js": "^0.13.6",
+    "socket.io-client": "^1.4.5"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.10.0",
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "gulp": "^3.9.0",
+    "gulp-batch": "^1.0.5",
+    "gulp-browserify": "*",
+    "gulp-mocha": "^2.2.0",
+    "gulp-watch": "^4.3.5",
+    "run-sequence": "^1.1.4"
+  }
+}
