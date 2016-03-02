@@ -5,8 +5,22 @@ module.exports = function(app) {
       $scope.users = res;
     });
 
+    $scope.newUser = {
+      name: 'Alice',
+      age: 23
+    };
+
     $scope.create = function() {
-      User.create({name:'Alice', age: '23'}).then(function() {
+      User.create({
+        name: $scope.newUser.name,
+        age: $scope.newUser.age
+      }).then(function() {}).catch(function(err) {
+        console.log(err);
+      });
+    };
+
+    $scope.delete = function(item) {
+      User.delete(item).then(function() {
       }).catch(function(err) {
         console.log(err);
       });

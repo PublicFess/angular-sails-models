@@ -1,6 +1,7 @@
-var changeCriteria = require('./utils').changeCriteria;
-var socketIOClient = require('socket.io-client');
-var sailsIOClient = require('sails.io.js');
+var changeCriteria = require('./utils').changeCriteria
+  , socketIOClient = require('socket.io-client')
+  , sailsIOClient = require('sails.io.js')
+  , _ = require('lodash');
 
 var io = sailsIOClient(socketIOClient);;
 
@@ -13,6 +14,9 @@ var BaseModel = function(url, adapter) {
     switch (type) {
       case 'created':
         Model.created(m.data);
+        break;
+      case 'destroyed':
+        Model.deleted(m.id);
         break;
     }
   });
@@ -50,13 +54,34 @@ var BaseModel = function(url, adapter) {
       var self = this;
       return adapter.post(self.url, data).then(function(res) {
         return res;
+      }).catch(function(err) {
+        throw err;
+      });
+    },
+
+    delete: function(data) {
+      var self = this;
+      var id = data.id || id;
+      return adapter.delete(self.url + '/' + id).then(function(res) {
+        return res;
+      }).catch(function(err) {
+        throw err;
       });
     },
 
     // Handlers for sockets events
+
     created: function(item) {
       this.items = this.items || [];
       this.items.push(item);
+    },
+
+    deleted: function(id) {
+      var self = this;
+      if (!self.items || !self.items.length) return;
+      _.remove(self.items, function(item) {
+        return item.id == id;
+      });
     }
   };
 

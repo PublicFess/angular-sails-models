@@ -1,9 +1,13 @@
 div.simple_actions(ng-controller='simple')
   h1 Базовые операции
   div(ng-if='!users.length')
+  input(ng-model='newUser.name')
+  input(ng-model='newUser.age')
+  button.create_btn(href="" ng-click='create()') Create
   table(ng-if='users.length')
     tr(ng-repeat='user in users')
       td(ng-bind='user.name')
       td(ng-bind='user.age')
-  button(href="" ng-click='create()') Create
-  button(href="" ng-click='findByAge()') Status
+      td 
+        button.delete_btn(href="" ng-click='delete(user)') Delete
+  

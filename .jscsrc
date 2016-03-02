@@ -13,7 +13,6 @@
 	"disallowSpaceBeforeSemicolon": true,
 	"disallowTabs": true,
 	"disallowTrailingComma": true,
-	"disallowTrailingWhitespace": true,
 	"disallowUnusedParams": true,
 	"disallowYodaConditions": [
     "==",

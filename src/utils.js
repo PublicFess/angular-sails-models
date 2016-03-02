@@ -1,4 +1,4 @@
-var isEqual = require('lodash.isequal')
+var isEqual = require('lodash.isequal');
 
 exports.serializeObj = function(obj) {
   var result = [];
@@ -9,7 +9,7 @@ exports.serializeObj = function(obj) {
 };
 
 exports.changeCriteria = function(model, criteria) {
-  var skip = isEqual(model.criteria, criteria)
+  var skip = isEqual(model.criteria, criteria);
   if (skip) return;
   model.criteria = criteria;
   model._lastChangeCriteria = new Date();

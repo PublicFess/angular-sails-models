@@ -4,5 +4,15 @@ module.exports = {
       User.publishCreate(item);
       return res.json(item);
     });
+  },
+
+  destroy: function(req, res) {
+    var id = req.params.id;
+    User.destroy({
+      id: id
+    }).then(function() {
+      User.publishDestroy(id);
+      res.send();
+    });
   }
 };

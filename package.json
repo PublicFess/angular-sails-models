@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/PublicFess/angular-sails-models#readme",
   "dependencies": {
-    "lodash.isequal": "^4.1.0",
+    "lodash": "^4.6.0",
     "sails": "^0.12.1",
     "sails.io.js": "^0.13.6",
     "socket.io-client": "^1.4.5"
