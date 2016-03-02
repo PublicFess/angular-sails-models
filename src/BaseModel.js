@@ -7,6 +7,16 @@ var io = sailsIOClient(socketIOClient);;
 var BaseModel = function(url, adapter) {
   io.sails.url = 'http://localhost:1337';
   adapter = adapter || io.socket;
+
+  adapter.on(url.substring(1), function(m) {
+    var type = m.verb;
+    switch (type) {
+      case 'created':
+        Model.created(m.data);
+        break;
+    }
+  });
+
   var Model = {
     url: url,
     criteria: {},
@@ -28,7 +38,6 @@ var BaseModel = function(url, adapter) {
     getAll: function(criteria) {
       var self = this;
       changeCriteria(self, criteria);
-      console.log(self._lastChangeCriteria);
       if (self._lastFetch > self._lastChangeCriteria && self.items) {
         return Promise.resolve().then(function() {
           return self.items;
@@ -42,6 +51,12 @@ var BaseModel = function(url, adapter) {
       return adapter.post(self.url, data).then(function(res) {
         return res;
       });
+    },
+
+    // Handlers for sockets events
+    created: function(item) {
+      this.items = this.items || [];
+      this.items.push(item);
     }
   };
 

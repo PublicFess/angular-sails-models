@@ -1,0 +1,9 @@
+div(ng-controller='simple')
+  h1 Базовые операции
+  div(ng-if='!users.length')
+  table(ng-if='users.length')
+    tr(ng-repeat='user in users')
+      td(ng-bind='user.name')
+      td(ng-bind='user.age')
+  button(href="" ng-click='create()') Create
+  button(href="" ng-click='findByAge()') Status

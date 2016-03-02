@@ -63,7 +63,7 @@ module.exports.connections = {
     // user: 'username',
     // password: 'password',
     database: 'modelsTest',
-    migrate: 'drop'
+    migrate: 'alter'
   },
 
   /***************************************************************************
