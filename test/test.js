@@ -1,17 +1,16 @@
-describe('MyController', function(){
-	beforeEach(module('test-models'));
+var chai = require('chai')
+  , promised = require('chai-as-promised');
+chai.use(promised);
+var expect = chai.expect;
 
-  var $controller;
-
-  beforeEach(inject(function(_$controller_){
-    $controller = _$controller_;
-  }));
-
-  describe('$scope.grade', function() {
-    it('sets the strength to "strong" if the password length is >8 chars', function() {
-      var $scope = {};
-      var controller = $controller('ctrl', { $scope: $scope });
-      expect($scope.getName()).to.be.equal('Nikita');
+describe('Angular Sails Models', function() {
+  describe('Simple Actions', function() {
+    it('should create a new item', function() {
+      browser.get('http://localhost:3000');
+      var simple = element(by.className('simple_actions'));
+      var count_element = element.all(by.css('.simple_actions table tr')).count();
+      expect(count_element).to.eventually.equal(0);
     });
   });
+
 });
