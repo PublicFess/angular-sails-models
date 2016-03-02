@@ -19,6 +19,17 @@ module.exports = function(app) {
       });
     };
 
+    $scope.update = function(item) {
+      User.update({
+        id: item.id,
+        name: item.name,
+        age: item.age
+      }).then(function() {
+      }).catch(function(err) {
+        console.log(err);
+      });
+    };
+
     $scope.delete = function(item) {
       User.delete(item).then(function() {
       }).catch(function(err) {

@@ -16,7 +16,7 @@ var BaseModel = function(url, adapter) {
         Model.created(m.data);
         break;
       case 'destroyed':
-        Model.deleted(m.id);
+        Model.destroyed(m.id);
         break;
     }
   });
@@ -59,6 +59,17 @@ var BaseModel = function(url, adapter) {
       });
     },
 
+    update: function(data) {
+      console.log(data);
+      var self = this;
+      var id = data.id;
+      return adapter.post(self.url + '/' + id, data).then(function(res) {
+        return res;
+      }).catch(function(err) {
+        throw err;
+      });
+    },
+
     delete: function(data) {
       var self = this;
       var id = data.id || id;
@@ -76,13 +87,22 @@ var BaseModel = function(url, adapter) {
       this.items.push(item);
     },
 
-    deleted: function(id) {
+    updated: function(data) {
+      var self = this;
+      if (!self.items || !self.items.length) return;
+      var item = _.find(self.items, function(item) {
+        return item.id == data;
+      });
+    },
+
+    destroyed: function(id) {
       var self = this;
       if (!self.items || !self.items.length) return;
       _.remove(self.items, function(item) {
         return item.id == id;
       });
     }
+
   };
 
   return Model;

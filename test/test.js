@@ -26,6 +26,21 @@ describe('Angular Sails Models', function() {
       expect(count_element).to.eventually.equal(1);
     });
 
+    it('should update item', function() {
+      var inputName = element(by.model('user.name'));
+      inputName.clear();
+      inputName.sendKeys('Alice');
+      var inputAge = element(by.model('user.age'));
+      inputAge.clear();
+      inputAge.sendKeys('23');
+      element(by.css('.update_btn')).click();
+      browser.refresh();
+      inputName = element(by.model('user.name'));
+      expect(inputName.getAttribute('value')).to.eventually.equal('Alice');
+      inputAge = element(by.model('user.age'));
+      expect(inputAge.getAttribute('value')).to.eventually.equal('23');
+    });
+
     it('should delete item', function() {
       element(by.css('.delete_btn')).click();
       var count_element = element.all(by.css('.simple_actions table tr')).count();
