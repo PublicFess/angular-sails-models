@@ -1,6 +1,9 @@
 node_modules/
 npm_cache/
 .idea/
-test/
-gulpfile.js
-tasks/
+
+client/dist/
+client/node_modules
+client/npm-cache
+
+server/node_modules

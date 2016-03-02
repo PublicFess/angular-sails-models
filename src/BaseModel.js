@@ -1,10 +1,10 @@
-var changeCriteria = require('./utils').changeCriteria
+var changeCriteria = require('./utils').changeCriteria;
 var socketIOClient = require('socket.io-client');
 var sailsIOClient = require('sails.io.js');
 
 var io = sailsIOClient(socketIOClient);;
 
-var BaseModel = function(adapter, url) {
+var BaseModel = function(url, adapter) {
   io.sails.url = 'http://localhost:1337';
   adapter = adapter || io.socket;
   var Model = {
@@ -43,9 +43,9 @@ var BaseModel = function(adapter, url) {
         return res;
       });
     }
-  }
+  };
 
   return Model;
-}
+};
 
 module.exports = BaseModel;

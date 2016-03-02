@@ -1,0 +1,24 @@
+{
+	"requireSemicolons": true,
+	"disallowSpaceBeforeSemicolon": true,
+	"disallowEmptyBlocks": true,
+	"disallowIdenticalDestructuringNames": true,
+	"disallowMixedSpacesAndTabs": true,
+	"disallowMultiLineTernary": true,
+	"disallowMultipleLineBreaks": true,
+	"disallowMultipleLineStrings": true,
+	"disallowMultipleSpaces": true,
+	"disallowNewlineBeforeBlockStatements": true,
+	"disallowSpaceBeforeComma": true,
+	"disallowSpaceBeforeSemicolon": true,
+	"disallowTabs": true,
+	"disallowTrailingComma": true,
+	"disallowTrailingWhitespace": true,
+	"disallowUnusedParams": true,
+	"disallowYodaConditions": [
+    "==",
+    "===",
+    "!=",
+    "!=="
+	],
+}
