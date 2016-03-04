@@ -4,6 +4,10 @@ div.simple_actions(ng-controller='simple')
   input(ng-model='newUser.name')
   input(ng-model='newUser.age')
   button.create_btn(href="" ng-click='create()') Create
+  div
+    button.find_one_by_age(ng-click='findOneByAge()') findOne
+    button.find_by_age(ng-click='findByAge()') find
+    button.reset_criteria(ng-click='resetCriteria()') find
   table(ng-if='users.length')
     tr(ng-repeat='user in users')
       td
@@ -15,3 +19,6 @@ div.simple_actions(ng-controller='simple')
       td 
         button.delete_btn(href="" ng-click='delete(user)') Delete
   
+  div
+    span(ng-bind='user.name')
+    span(ng-bind='user.age')

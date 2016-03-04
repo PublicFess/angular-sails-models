@@ -1,7 +1,9 @@
-var changeCriteria = require('./utils').changeCriteria
-  , socketIOClient = require('socket.io-client')
-  , sailsIOClient = require('sails.io.js')
-  , _ = require('lodash');
+var changeCriteriaAll = require('./utils').changeCriteriaAll
+, changeCriteriaOne = require('./utils').changeCriteriaOne
+, checkCriteria = require('./utils').checkCriteria
+, socketIOClient = require('socket.io-client')
+, sailsIOClient = require('sails.io.js')
+, _ = require('lodash');
 
 var io = sailsIOClient(socketIOClient);;
 
@@ -13,26 +15,34 @@ var BaseModel = function(url, adapter) {
     var type = m.verb;
     switch (type) {
       case 'created':
-        Model.created(m.data);
-        break;
+      Model.created(m.data);
+      break;
       case 'destroyed':
-        Model.destroyed(m.id);
-        break;
+      Model.destroyed(m.id);
+      break;
     }
   });
 
   var Model = {
     url: url,
-    criteria: {},
+    items: [],
+    criteriaAll: {},
+    criteriaOne: {},
 
-    _lastChangeCriteria: null,
-    _lastFetch: null,
+    _lastChangeCriteriaAll: null,
+    _lastFetchAll: null,
+    _lastChangeCriteriaOne: null,
+    _lastFetchOne: null,
 
     fetch: function() {
       var self = this;
-      return adapter.get(self.url, self.criteria)
+      return adapter.get(self.url, self.criteriaAll)
       .then(function(res) {
-        self.items = res.body;
+        self._lastFetchAll = new Date();
+        _.remove(self.items, function() {
+          return true;
+        });
+        self.items.joinWith(res.body);
         return self.items;
       }).catch(function(err) {
         throw err;
@@ -41,13 +51,36 @@ var BaseModel = function(url, adapter) {
 
     getAll: function(criteria) {
       var self = this;
-      changeCriteria(self, criteria);
-      if (self._lastFetch > self._lastChangeCriteria && self.items) {
+      changeCriteriaAll(self, criteria);
+      if (self._lastFetchAll > self._lastChangeCriteriaAll && self.items) {
         return Promise.resolve().then(function() {
           return self.items;
         });
       }
       return self.fetch();
+    },
+
+    fetchOne: function() {
+      var self = this;
+      return adapter.get(self.url, self.criteriaOne)
+      .then(function(res) {
+        self._lastFetchOne = new Date();
+        self.item = res.body[0];
+        return self.item;
+      }).catch(function(err) {
+        throw err;
+      });
+    },
+
+    getOne: function(criteria) {
+      var self = this;
+      changeCriteriaOne(self, criteria);
+      if (self._lastFetchOne > self._lastChangeCriteriaOne && self.item) {
+        return Promise.resolve().then(function() {
+          return self.item;
+        });
+      }
+      return self.fetchOne();
     },
 
     create: function(data) {
@@ -60,7 +93,6 @@ var BaseModel = function(url, adapter) {
     },
 
     update: function(data) {
-      console.log(data);
       var self = this;
       var id = data.id;
       return adapter.post(self.url + '/' + id, data).then(function(res) {
@@ -83,8 +115,10 @@ var BaseModel = function(url, adapter) {
     // Handlers for sockets events
 
     created: function(item) {
-      this.items = this.items || [];
-      this.items.push(item);
+      if (checkCriteria(this, item)) {
+        this.items = this.items || [];
+        this.items.push(item);
+      }
     },
 
     updated: function(data) {
@@ -101,6 +135,12 @@ var BaseModel = function(url, adapter) {
       _.remove(self.items, function(item) {
         return item.id == id;
       });
+      if (self.item && self.item.id == id) {
+        for (var i in self.item) {
+          if (!self.item.hasOwnProperty(i)) return;
+          delete self.item[i];
+        }
+      }
     }
 
   };

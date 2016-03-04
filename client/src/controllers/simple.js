@@ -1,8 +1,8 @@
 module.exports = function(app) {
   app.controller('simple', ['$scope', '$sails', 'User', function($scope, $sails, User) {
 
-    User.getAll().then(function(res) {
-      $scope.users = res;
+    User.getAll().then(function() {
+      $scope.users = User.items;
     });
 
     $scope.newUser = {
@@ -38,8 +38,23 @@ module.exports = function(app) {
     };
 
     $scope.findByAge = function() {
-      User.getAll({age: '23'}).then(function(res) {
-        console.log(res);
+      User.getAll({age: '23'}).then(function() {
+        $scope.users = User.items;
+      }).catch(function(err) {
+        console.log(err);
+      });
+    };
+
+    $scope.findOneByAge = function() {
+      User.getOne({age: '23'}).then(function(res) {
+        $scope.user = res;
+      }).catch(function(err) {
+        console.log(err);
+      });
+    };
+
+    $scope.resetCriteria = function() {
+      User.getAll().then(function() {
       }).catch(function(err) {
         console.log(err);
       });
