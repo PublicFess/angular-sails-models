@@ -31,7 +31,7 @@ module.exports = function(app) {
     };
 
     $scope.delete = function(item) {
-      User.delete(item).then(function() {
+      User.destroy(item).then(function() {
       }).catch(function(err) {
         console.log(err);
       });

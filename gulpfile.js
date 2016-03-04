@@ -32,7 +32,7 @@ gulp.task('js', function() {
 
 gulp.task('js:watch', function() {
   gulp.start('js');
-  watch(['client/src/app.js', 'client/src/**/*.js', 'src/*.js'], batch(function (events, done) {
+  watch(['client/src/app.js', 'client/src/**/*.js', 'src/*.js', 'src/**/*.js'], batch(function (events, done) {
     gulp.start('js', done);
   }));
 });

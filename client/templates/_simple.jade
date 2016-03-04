@@ -7,7 +7,7 @@ div.simple_actions(ng-controller='simple')
   div
     button.find_one_by_age(ng-click='findOneByAge()') findOne
     button.find_by_age(ng-click='findByAge()') find
-    button.reset_criteria(ng-click='resetCriteria()') find
+    button.reset_criteria(ng-click='resetCriteria()') reset
   table(ng-if='users.length')
     tr(ng-repeat='user in users')
       td
