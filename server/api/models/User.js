@@ -6,6 +6,10 @@ module.exports = {
 
     age: {
       type: 'string'
+    },
+
+    city: {
+      type: 'string'
     }
   }
-}
+};

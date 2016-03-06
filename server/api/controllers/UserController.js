@@ -29,5 +29,23 @@ module.exports = {
     }).catch(function(err) {
       serverError(err);
     });
+  },
+
+  changeCity: function(req, res) {
+    var id = req.params.id;
+    console.log(id);
+    User.update({
+      id: id
+    }, {
+      city: 'Kursk'
+    }).then(function() {
+      User.publishUpdate(id, {
+        id: id,
+        city: 'Kursk'
+      });
+      res.send();
+    }).catch(function(err) {
+      serverError(err);
+    });
   }
 };

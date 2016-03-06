@@ -30,6 +30,24 @@ module.exports = function(app) {
       });
     };
 
+    $scope.forceUpdate = function(item) {
+      User.update({
+        id: item.id,
+        name: 'Frank',
+        age: '58'
+      }).then(function() {
+      }).catch(function(err) {
+        console.log(err);
+      });
+    };
+
+    $scope.changeCity = function(item) {
+      User.post('/changeCity/' + item.id).then(function() {
+      }).catch(function(err) {
+        console.log(err);
+      });
+    };
+
     $scope.delete = function(item) {
       User.destroy(item).then(function() {
       }).catch(function(err) {

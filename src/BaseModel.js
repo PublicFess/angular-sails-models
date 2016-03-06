@@ -16,6 +16,9 @@ var BaseModel = function(url, adapter) {
       case 'created':
       Model.created(m.data);
       break;
+      case 'updated':
+      Model.updated(m.data);
+      break;
       case 'destroyed':
       Model.destroyed(m.id);
       break;
@@ -42,6 +45,7 @@ var BaseModel = function(url, adapter) {
   Model.create = require('./actions/create')(adapter, Model);
   Model.update = require('./actions/update')(adapter, Model);
   Model.destroy = require('./actions/destroy')(adapter, Model);
+  Model.post = require('./actions/post')(adapter, Model);
 
   Model.created = require('./sockets/created');
   Model.updated = require('./sockets/updated');

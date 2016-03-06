@@ -14,8 +14,14 @@ div.simple_actions(ng-controller='simple')
         input(ng-model='user.name')
       td
         input(ng-model='user.age')
+      td
+        span(ng-bind='user.city')
       td 
         button.update_btn(href="" ng-click='update(user)') Update
+      td 
+        button.force_update_btn(href="" ng-click='forceUpdate(user)') Force Update
+      td 
+        button.change_city_btn(href="" ng-click='changeCity(user)') Change City
       td 
         button.delete_btn(href="" ng-click='delete(user)') Delete
   

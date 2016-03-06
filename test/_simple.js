@@ -51,6 +51,22 @@ describe('Simple Actions', function() {
     expect(inputAge.getAttribute('value')).to.eventually.equal('23');
   });
 
+  it('should force update first item', function() {
+    element(by.css('.simple_actions tr:nth-child(1) .force_update_btn')).click();
+    var inputNameSelector = '.simple_actions tr:nth-child(1) td:nth-child(1) input';
+    var inputAgeSelector = '.simple_actions tr:nth-child(1) td:nth-child(2) input';
+    var inputName = element(by.css(inputNameSelector));
+    expect(inputName.getAttribute('value')).to.eventually.equal('Frank');
+    var inputAge = element(by.css(inputAgeSelector));
+    expect(inputAge.getAttribute('value')).to.eventually.equal('58');
+  });
+
+  it('should post to changeCity by first item', function() {
+    element(by.css('.simple_actions tr:nth-child(1) .change_city_btn')).click();
+    var city = element(by.binding('user.city'));
+    expect(city.getText()).to.eventually.equal('Kursk');
+  });
+
   it('should update second item', function() {
     var inputNameSelector = '.simple_actions tr:nth-child(2) td:nth-child(1) input';
     var inputName = element(by.css(inputNameSelector));
