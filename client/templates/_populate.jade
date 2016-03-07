@@ -1,0 +1,50 @@
+div.link(ng-controller='populate')
+  h2 Связывания
+  div
+    p Пользователи
+    input(ng-model='newUser.name')
+    input(ng-model='newUser.age')
+    input(ng-model='newUser.city')
+    button.create_user(href="" ng-click='create()') Create
+
+  table.users(ng-if='users.length')
+    tr(ng-repeat='user in users')
+      td
+        span(ng-bind='user.name')
+      td
+        span(ng-bind='user.age')
+      td
+        span(ng-bind='user.city')  
+      td
+        span(ng-bind='user.Address.city')
+      td
+        span(ng-bind='user.Address.street')
+      td
+        span(ng-bind='user.Address.building')
+        
+      td 
+        button.delete_btn(href="" ng-click='deleteUser(user)') Delete        
+      td 
+        button.populate_btn(href="" ng-click='populateAddress(user)') Populate        
+
+  div
+    p Адреса
+    input(ng-model='newAddress.city')
+    input(ng-model='newAddress.street')
+    input(ng-model='newAddress.building')
+    button.create_address(href="" ng-click='createAddress()') Create
+
+
+  table.addresses(ng-if='addresses.length')
+    tr(ng-repeat='address in addresses')
+      td
+        input(ng-model='address.city')
+      td
+        input(ng-model='address.street')
+      td
+        input(ng-model='address.building')
+      td 
+        button.update_btn(href="" ng-click='updateAddress(address)') Update
+      td 
+        button.delete_btn(href="" ng-click='deleteAddress(address)') Delete
+    
