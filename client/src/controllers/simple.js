@@ -9,7 +9,7 @@ module.exports = function(app) {
       name: 'Alice',
       age: 23
     };
-
+    
     $scope.create = function() {
       User.create({
         name: $scope.newUser.name,

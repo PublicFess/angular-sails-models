@@ -7,6 +7,7 @@ describe('Angular Sails Models', function() {
   before(function() {
     browser.get('http://localhost:3000');
   });
-  require('./_simple');
-  require('./_get');
+  require('./specs/_simple');
+  require('./specs/_get');
+  require('./specs/_populate');
 });

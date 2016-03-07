@@ -1,6 +1,5 @@
 
-var checkCriteria = require('./utils').checkCriteria
-, socketIOClient = require('socket.io-client')
+var socketIOClient = require('socket.io-client')
 , sailsIOClient = require('sails.io.js')
 , _ = require('lodash');
 
@@ -41,6 +40,7 @@ var BaseModel = function(url, adapter) {
   Model.getAll = require('./model_methods/getAll')(Model);
   Model.fetchOne = require('./model_methods/fetchOne')(adapter, Model);
   Model.getOne = require('./model_methods/getOne')(Model);
+  Model.populate = require('./model_methods/populate')(Model);
 
   Model.create = require('./actions/create')(adapter, Model);
   Model.update = require('./actions/update')(adapter, Model);

@@ -1,7 +1,7 @@
-var checkCriteria = require('../utils').checkCriteria;
+var checkAllCriteria = require('../utils').checkAllCriteria;
 
 var created = function(item) {
-  if (checkCriteria(this, item)) {
+  if (checkAllCriteria(this, item)) {
     this.items = this.items || [];
     this.items.push(item);
   }

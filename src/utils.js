@@ -21,12 +21,32 @@ Array.prototype.joinWith = function(array) {
   });
 };
 
-exports.checkCriteria = function(model, item) {
-  var criteria = model.criteriaAll;
+exports.checkCriteria = function(item, criteria) {
   var result = true;
   for (var i in criteria) {
     if (!criteria.hasOwnProperty(i)) return;
     if (criteria[i] != item[i]) result = false;
   };
   return result;
+};
+
+exports.checkAllCriteria = function(model, item) {
+  var criteria = model.criteriaAll;
+  var result = true;
+  result = exports.checkCriteria(item, criteria);
+  return result;
+};
+
+exports.helpFind = function(criteria) {
+  var criteria = criteria;
+  return function(o) {
+    var skip = false;
+    for (var i in criteria) {
+      if (!criteria.hasOwnProperty(i)) return;
+      if (o[i].toString() != criteria[i].toString()) {
+        skip = true;
+      }
+    }
+    return !skip;
+  };
 };
