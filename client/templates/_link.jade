@@ -1,0 +1,11 @@
+div(ng-controller='link')
+  h2 Связывание
+  button(ng-click='prepareData()') Prepare Data
+  button(ng-click='linkUser()') Link
+  div(ng-repeat='user in users')
+    table
+      tr(ng-repeat='address in user.Addresses')
+        td(ng-bind='address.city')
+        td(ng-bind='address.street')
+        td(ng-bind='address.building')
+        
