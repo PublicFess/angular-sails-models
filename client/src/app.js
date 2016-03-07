@@ -14,5 +14,6 @@
 
   require('./controllers/simple')(app);
   require('./controllers/populate')(app);
+  require('./controllers/link')(app);
 
 })();

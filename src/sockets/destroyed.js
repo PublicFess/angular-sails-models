@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 var destroyed = function(id) {
   var self = this;
   if (!self.items || !self.items.length) return;
@@ -10,6 +12,13 @@ var destroyed = function(id) {
       delete self.item[i];
     }
   }
+  this._associations.forEach(function(a) {
+    var item = a.item
+      , value = a.value;
+    _.remove(item[value], function(i) {
+      return i.id == id;
+    });
+  });
 };
 
 module.exports = destroyed;
