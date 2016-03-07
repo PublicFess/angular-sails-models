@@ -34,14 +34,11 @@ module.exports = function(app) {
       };
 
       $scope.createAddress = function() {
-        console.log(1);
         Address.create({
           city: $scope.newAddress.city,
           street: $scope.newAddress.street,
           building: $scope.newAddress.building
-        }).then(function(res) {
-          console.log(res);
-        }).catch(function(err) {
+        }).then(function() {}).catch(function(err) {
           console.log(err);
         });
       };
