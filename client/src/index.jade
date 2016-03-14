@@ -42,10 +42,15 @@ html(ng-app="test-models")
         td {{user.name}}
         td {{user.age}}
         td {{user.city}}
+        td {{user.Address.city}}
+        td {{user.Address.street}}
+        td {{user.Address.building}}
         td
           button.update_user(ng-click='updateUser(user)') Update User
         td
           button.change_city(ng-click='changeCity(user)') Change City
+        td
+          button.populate_user(ng-click='populateAddress(user)') Populate
         td
           button.delete_user(ng-click='deleteUser(user)') Delete User
     
@@ -55,7 +60,7 @@ html(ng-app="test-models")
         td {{address.street}}
         td {{address.building}}
         td
-          button.update_user(ng-click='updateAddress(address)') Update Address
+          button.update_address(ng-click='updateAddress(address)') Update Address
         td
-          button.delete_user(ng-click='deleteAddress(address)') Delete Address
+          button.delete_address(ng-click='deleteAddress(address)') Delete Address
     

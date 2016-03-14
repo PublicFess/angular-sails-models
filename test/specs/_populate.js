@@ -5,11 +5,11 @@ var expect = chai.expect;
 
 describe('Populate', function() {
   it('create ', function() {
-    var parent = element(by.css('.link'));
+    var parent = element(by.css('.create_user'));
     var inputName = parent.element(by.model('newUser.name'));
     var inputAge = parent.element(by.model('newUser.age'));
     var inputCity = parent.element(by.model('newUser.city'));
-    var create_btn = parent.element(by.css('.create_user'));
+    var create_btn = parent.element(by.tagName('button'));
 
     inputName.clear();
     inputName.sendKeys('Sheldon');
@@ -19,13 +19,14 @@ describe('Populate', function() {
     inputCity.sendKeys('Texas');
     create_btn.click();
 
-    var count_users = element.all(by.css('.link table.users tr')).count();
+    var count_users = element.all(by.css('.users tr')).count();
     expect(count_users).to.eventually.equal(1);
 
+    parent = element(by.css('.create_address'));
     var inputCity = parent.element(by.model('newAddress.city'));
     var inputStreet = parent.element(by.model('newAddress.street'));
     var inputBuilding = parent.element(by.model('newAddress.building'));
-    create_btn = parent.element(by.css('.create_address'));
+    create_btn = parent.element(by.tagName('button'));
 
     inputCity.clear();
     inputCity.sendKeys('Texas');
@@ -35,23 +36,24 @@ describe('Populate', function() {
     inputBuilding.sendKeys('71');
     create_btn.click();
 
-    var count_element = element.all(by.css('.link table.addresses tr')).count();
+    var count_element = element.all(by.css('.addresses tr')).count();
     expect(count_element).to.eventually.equal(1);
   });
 
   it('should populate address in user by city field', function() {
-    element(by.css('.link table.users tr:nth-child(1) .populate_btn')).click();
-    expect(element(by.css('.link table.users tr:nth-child(1) td:nth-child(4)')).getText()).to.eventually.equal('Texas');
-    expect(element(by.css('.link table.users tr:nth-child(1) td:nth-child(5)')).getText()).to.eventually.equal('Sheldon`s street');
-    expect(element(by.css('.link table.users tr:nth-child(1) td:nth-child(6)')).getText()).to.eventually.equal('71');
+    element(by.css('.users tr:nth-child(1) .populate_user')).click();
+    expect(element(by.css('.users tr:nth-child(1) td:nth-child(4)')).getText()).to.eventually.equal('Texas');
+    expect(element(by.css('.users tr:nth-child(1) td:nth-child(5)')).getText()).to.eventually.equal('Sheldon`s street');
+    expect(element(by.css('.users tr:nth-child(1) td:nth-child(6)')).getText()).to.eventually.equal('71');
   });
 
   it('should update address and user.Address would be updated too', function() {
-    var parent = element(by.css('.link'));
-    var inputCity = parent.element(by.model('address.city'));
-    var inputStreet = parent.element(by.model('address.street'));
-    var inputBuilding = parent.element(by.model('address.building'));
-    var update_btn = parent.element(by.css('table.addresses tr .update_btn'));
+    element(by.css('.addresses tr:nth-child(1) .update_address')).click();
+    var parent = element(by.css('.save_address'));
+    var inputCity = parent.element(by.model('updatingAddress.city'));
+    var inputStreet = parent.element(by.model('updatingAddress.street'));
+    var inputBuilding = parent.element(by.model('updatingAddress.building'));
+    var update_btn = parent.element(by.tagName('button'));
 
     inputCity.clear();
     inputCity.sendKeys('Texas');
@@ -61,17 +63,19 @@ describe('Populate', function() {
     inputBuilding.sendKeys('28');
     update_btn.click();
 
-    expect(element(by.css('.link table.users tr:nth-child(1) td:nth-child(5)')).getText()).to.eventually.equal('Leonard`s street');
-    expect(element(by.css('.link table.users tr:nth-child(1) td:nth-child(6)')).getText()).to.eventually.equal('28');
+    browser.sleep(100).then(function() {
+      expect(element(by.css('.users tr:nth-child(1) td:nth-child(5)')).getText()).to.eventually.equal('Leonard`s street');
+      expect(element(by.css('.users tr:nth-child(1) td:nth-child(6)')).getText()).to.eventually.equal('28');
+    });
   });
 
   it('shoutd clear all', function() {
-    element(by.css('table.users tr .delete_btn')).click();
-    var count_users = element.all(by.css('.link table.users tr')).count();
+    element(by.css('.users tr .delete_user')).click();
+    var count_users = element.all(by.css('.users tr')).count();
     expect(count_users).to.eventually.equal(0);
 
-    element(by.css('table.addresses tr .delete_btn')).click();
-    var count_addresses = element.all(by.css('.link table.addresses tr')).count();
+    element(by.css('.addresses tr .delete_address')).click();
+    var count_addresses = element.all(by.css('.addresses tr')).count();
     expect(count_addresses).to.eventually.equal(0);
   });
 });

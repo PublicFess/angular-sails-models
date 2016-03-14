@@ -6,7 +6,6 @@ var updated = function(data) {
   var item = _.find(self.items, function(item) {
     return item.id == data.id;
   });
-  console.log(item);
   if (item) assign(item, data);
 };
 

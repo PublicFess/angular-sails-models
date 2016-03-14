@@ -9,5 +9,5 @@ describe('Angular Sails Models', function() {
   });
   require('./specs/_simple');
   require('./specs/_get');
-  // require('./specs/_populate');
+  require('./specs/_populate');
 });
