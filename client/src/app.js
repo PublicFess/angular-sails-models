@@ -12,6 +12,7 @@
   require('./models/UserModel')(app);
   require('./models/AddressModel')(app);
 
+  require('./controllers/main')(app);
   require('./controllers/simple')(app);
   require('./controllers/populate')(app);
   require('./controllers/link')(app);

@@ -27,7 +27,7 @@ module.exports = {
       User.publishUpdate(id, updateParams);
       res.send();
     }).catch(function(err) {
-      serverError(err);
+      res.serverError(err);
     });
   },
 
