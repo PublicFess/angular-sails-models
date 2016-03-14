@@ -37,6 +37,12 @@ html(ng-app="test-models")
         td {{user.name}}
         td {{user.age}}
         td {{user.city}}
+        td
+          button.link_user(ng-click='linkUserWithAddresses(user)') Link Addresses
+      tr(ng-repeat='address in user.Addresses')
+        td {{address.city}}
+        td {{address.street}}
+        td {{address.building}}
     table.users
       tr(ng-repeat='user in users')
         td {{user.name}}

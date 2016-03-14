@@ -42,7 +42,7 @@ var BaseModel = function(url, adapter) {
   Model.fetchOne = require('./model_methods/fetchOne')(adapter, Model);
   Model.getOne = require('./model_methods/getOne')(Model);
   Model.populate = require('./model_methods/populate')(Model);
-  Model.link = require('./model_methods/link')(Model);
+  Model.linkItem = require('./model_methods/linkItem')(Model);
 
   Model.create = require('./actions/create')(adapter, Model);
   Model.update = require('./actions/update')(adapter, Model);

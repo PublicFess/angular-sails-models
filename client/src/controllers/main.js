@@ -111,6 +111,10 @@ var main = function(app) {
     $scope.populateAddress = function(item) {
       Address.populate(item, 'Address', {'city': item.city});
     };
+
+    $scope.linkUserWithAddresses = function(item) {
+      Address.linkItem(item, 'Addresses', {});
+    };
   }]);
 };
 

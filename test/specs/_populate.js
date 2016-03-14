@@ -69,7 +69,7 @@ describe('Populate', function() {
     });
   });
 
-  it('shoutd clear all', function() {
+  it('should clear all', function() {
     element(by.css('.users tr .delete_user')).click();
     var count_users = element.all(by.css('.users tr')).count();
     expect(count_users).to.eventually.equal(0);
