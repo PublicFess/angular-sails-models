@@ -28,6 +28,15 @@ html(ng-app="test-models")
       input(ng-model='updatingAddress.street')
       input(ng-model='updatingAddress.building')
       button(ng-click='saveAddress()') Save Address
+    div
+      button.find_by_age(ng-click='findByAge()') Find By Age
+      button.find_one_by_age(ng-click='findOneByAge()') Find One By Age
+      button.reset_criteria(ng-click='resetCriteria()') Reset Criteria
+    table.user
+      tr
+        td {{user.name}}
+        td {{user.age}}
+        td {{user.city}}
     table.users
       tr(ng-repeat='user in users')
         td {{user.name}}

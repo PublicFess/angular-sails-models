@@ -3,7 +3,7 @@ var chai = require('chai')
 chai.use(promised);
 var expect = chai.expect;
 
-describe.only('Simple Actions', function() {
+describe('Simple Actions', function() {
 
   it('items should be 0', function() {
     var count_element = element.all(by.css('.users tr')).count();
@@ -66,7 +66,7 @@ describe.only('Simple Actions', function() {
   it('should delete second item', function() {
     element(by.css('.users tr:nth-child(1) .delete_user')).click();
     var count_element = element.all(by.css('.users tr')).count();
-    browser.sleep(300);
+    browser.refresh();
     expect(count_element).to.eventually.equal(0);
   });
 });
