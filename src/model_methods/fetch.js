@@ -6,7 +6,8 @@ var fetch = function(adapter, model) {
       _.remove(model.items, function() {
         return true;
       });
-      model.items.joinWith(res.body);
+      var models = res.body.models || res.body;
+      model.items.joinWith(models);
       return model.items;
     }).catch(function(err) {
       throw err;

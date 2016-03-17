@@ -115,6 +115,19 @@ var main = function(app) {
     $scope.linkUserWithAddresses = function(item) {
       Address.linkItem(item, 'Addresses', {});
     };
+
+    $scope.findAddressByBuilding = function() {
+      Address.getAll({building: '28'}).then(function() {
+
+      });
+    };
+
+    $scope.resetCriteriaAddress = function() {
+      Address.getAll().then(function() {
+      }).catch(function(err) {
+        console.log(err);
+      });
+    };
   }]);
 };
 

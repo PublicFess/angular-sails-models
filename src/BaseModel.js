@@ -40,7 +40,9 @@ var BaseModel = function(url, adapter) {
   Model.fetch = require('./model_methods/fetch')(adapter, Model);
   Model.getAll = require('./model_methods/getAll')(Model);
   Model.fetchOne = require('./model_methods/fetchOne')(adapter, Model);
+  Model.fetchOneById = require('./model_methods/fetchOneById')(adapter, Model);
   Model.getOne = require('./model_methods/getOne')(Model);
+  Model.getOneById = require('./model_methods/getOneById')(Model);
   Model.populate = require('./model_methods/populate')(Model);
   Model.linkItem = require('./model_methods/linkItem')(Model);
 

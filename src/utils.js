@@ -16,6 +16,7 @@ exports.changeCriteriaOne = function(model, criteria) {
 
 Array.prototype.joinWith = function(array) {
   var self = this;
+  if (!array || !array.length) return;
   array.forEach(function(item) {
     self.push(item);
   });
@@ -25,7 +26,23 @@ exports.checkCriteria = function(item, criteria) {
   var result = true;
   for (var i in criteria) {
     if (!criteria.hasOwnProperty(i)) return;
-    if (criteria[i] != item[i]) result = false;
+    switch (typeof criteria[i]) {
+      case 'string':
+        result = criteria[i] == item[i];
+        break;
+      case 'object':
+        if (criteria[i] == null) {
+          result = criteria[i] == item[i];
+          break;
+        };
+        var key = Object.keys(criteria[i])[0];
+        if (key == '$in') {
+          result = criteria[i][key].indexOf(item[i]) > -1;
+        };
+        break;
+      default:
+        break;
+    }
   };
   return result;
 };

@@ -18,7 +18,11 @@ var processingAssociation = function(items, association) {
     var existing = _.find(item[value], function(item) {
       return item.id == li.id;
     });
-    if (existing) return;
+    if (existing) {
+      existing = li;
+      return;
+    };
+
     item[value] = item[value] || [];
     item[value].push(li);
   });
