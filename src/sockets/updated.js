@@ -13,7 +13,7 @@ var updated = function(data) {
     var id = findIndex(self.items, {'id': data.id});
     self.items.splice(id, 1);
   };
-  if (self.item.id == data.id) {
+  if (self.item && self.item.id == data.id) {
     assign(self.item, data);
   };
 };

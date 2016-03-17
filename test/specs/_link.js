@@ -69,14 +69,17 @@ describe('Linking', function() {
       .getText()).to.eventually.equal('Leonard`s street');
   });
 
+  it('should destroy address and remove it from user.Addresses', function() {
+    element(by.css('.addresses tr:nth-child(1) .delete_address')).click();
+    browser.sleep(100).then(function() {
+      expect(element.all(by.css('.user tr')).count()).to.eventually.equal(2);
+    });
+  });
+
   it('should clear all', function() {
     element(by.css('.users tr .delete_user')).click();
     browser.sleep(100).then(function() {
       expect(element.all(by.css('.users tr')).count()).to.eventually.equal(0);
-      element(by.css('.addresses tr .delete_address')).click();
-      return browser.sleep(100);
-    }).then(function() {
-      expect(element.all(by.css('.addresses tr')).count()).to.eventually.equal(1);
       element(by.css('.addresses tr .delete_address')).click();
       return browser.sleep(100);
     }).then(function() {

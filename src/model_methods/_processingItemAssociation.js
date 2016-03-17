@@ -18,6 +18,7 @@ var processingAssociation = function(items, association) {
     var existing = _.find(item[value], function(item) {
       return item.id == li.id;
     });
+    console.log(li);
     if (existing) {
       existing = li;
       return;

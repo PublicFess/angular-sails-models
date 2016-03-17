@@ -1,14 +1,19 @@
 var checkAllCriteria = require('../utils').checkAllCriteria
   , processingItemAssociation = require('../model_methods/_processingItemAssociation');
 
-var created = function(item) {
-  if (checkAllCriteria(this, item)) {
-    this.items = this.items || [];
-    this.items.push(item);
-  }
-  this._associations.forEach(function(a) {
-    processingItemAssociation([item], a);
+var created = function(data) {
+  if (!data.length) data = [data];
+  var self = this;
+  data.forEach(function(item) {
+    if (checkAllCriteria(this, data)) {
+      self.items = self.items || [];
+      self.items.push(item);
+    }
+    self._associations.forEach(function(a) {
+      processingItemAssociation([item], a);
+    });
   });
+
 };
 
 module.exports = created;

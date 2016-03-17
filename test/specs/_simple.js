@@ -59,14 +59,17 @@ describe('Simple Actions', function() {
 
   it('should delete first item', function() {
     element(by.css('.users tr:nth-child(1) .delete_user')).click();
-    var count_element = element.all(by.css('.users tr')).count();
-    expect(count_element).to.eventually.equal(1);
+    browser.sleep(100).then(function() {
+      var count_element = element.all(by.css('.users tr')).count();
+      expect(count_element).to.eventually.equal(1);
+    });
   });
 
   it('should delete second item', function() {
     element(by.css('.users tr:nth-child(1) .delete_user')).click();
-    var count_element = element.all(by.css('.users tr')).count();
-    browser.refresh();
-    expect(count_element).to.eventually.equal(0);
+    browser.sleep(100).then(function() {
+      var count_element = element.all(by.css('.users tr')).count();
+      expect(count_element).to.eventually.equal(0);
+    });
   });
 });

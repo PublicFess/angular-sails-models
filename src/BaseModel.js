@@ -19,7 +19,7 @@ var BaseModel = function(url, adapter) {
       Model.updated(m.data);
       break;
       case 'destroyed':
-      Model.destroyed(m.id);
+      Model.destroyed(m.criteria || m.id);
       break;
     }
   });
