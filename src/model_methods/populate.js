@@ -3,12 +3,12 @@ var _ = require('lodash')
   , helpFind = require('../utils').helpFind;
 
 var populate = function(model) {
-  return function(item, value, criteria) {
-    if (!model.items || !model.items.length) {
+  return function(item, value, populatedModel, criteria) {
+    if (!populatedModel.items || !populatedModel.items.length) {
       item[value] = null;
       return;
     }
-    item[value] = _.find(model.items, helpFind(criteria));
+    item[value] = _.find(populatedModel.items, helpFind(criteria));
   };
 };
 

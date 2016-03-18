@@ -109,7 +109,7 @@ var main = function(app) {
     };
 
     $scope.populateAddress = function(item) {
-      Address.populate(item, 'Address', {'city': item.city});
+      User.populate(item, 'Address', Address, {'city': item.city});
     };
 
     $scope.linkUserWithAddresses = function(item) {
@@ -117,9 +117,7 @@ var main = function(app) {
     };
 
     $scope.findAddressByBuilding = function() {
-      Address.getAll({building: '28'}).then(function() {
-
-      });
+      Address.getAll({building: '28'}).then(function() {});
     };
 
     $scope.resetCriteriaAddress = function() {
