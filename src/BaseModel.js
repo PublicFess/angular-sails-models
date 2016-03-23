@@ -19,7 +19,7 @@ var BaseModel = function(url, adapter) {
       Model.updated(m.data);
       break;
       case 'destroyed':
-      Model.destroyed(m.criteria || m.id);
+      Model.destroyed(m.criteria || m.id || m.data);
       break;
     }
   });
@@ -27,24 +27,25 @@ var BaseModel = function(url, adapter) {
   var Model = {
     url: url,
     items: [],
+    cached: [],
+    criteriaCached: {},
     criteriaAll: {},
     criteriaOne: {},
 
-    _lastChangeCriteriaAll: null,
-    _lastFetchAll: null,
-    _lastChangeCriteriaOne: null,
-    _lastFetchOne: null,
-    _associations: []
+    _associations: [],
+    _modelAssociations: []
   };
 
+  Model.cache = require('./model_methods/cache')(adapter, Model);
   Model.fetch = require('./model_methods/fetch')(adapter, Model);
   Model.getAll = require('./model_methods/getAll')(Model);
   Model.fetchOne = require('./model_methods/fetchOne')(adapter, Model);
   Model.fetchOneById = require('./model_methods/fetchOneById')(adapter, Model);
   Model.getOne = require('./model_methods/getOne')(Model);
   Model.getOneById = require('./model_methods/getOneById')(Model);
-  Model.populate = require('./model_methods/populate')(Model);
+  Model.populate = require('./model_methods/populate')();
   Model.linkItem = require('./model_methods/linkItem')(Model);
+  Model.linkModel = require('./model_methods/linkModel')(Model);
 
   Model.create = require('./actions/create')(adapter, Model);
   Model.update = require('./actions/update')(adapter, Model);

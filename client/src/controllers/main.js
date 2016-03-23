@@ -1,10 +1,22 @@
 var main = function(app) {
   app.controller('main', ['$scope', 'User', 'Address', function($scope, User, Address) {
+
+    $scope.User = User;
+    $scope.logUser = function() {
+      console.log(User);
+    };
+
+    $scope.logAddress = function() {
+      console.log(Address);
+    };
+
     $scope.users = User.items;
     $scope.addresses = Address.items;
+    User.cache();
+    Address.cache();
+
     User.getAll();
     Address.getAll();
-
     $scope.newUser = {
       name: 'Alice',
       age: 23
@@ -87,7 +99,7 @@ var main = function(app) {
 
     $scope.findByAge = function() {
       User.getAll({age: '23'}).then(function() {
-        $scope.users = User.items;
+        $scope.$digest();
       }).catch(function(err) {
         console.log(err);
       });
@@ -95,7 +107,8 @@ var main = function(app) {
 
     $scope.findOneByAge = function() {
       User.getOne({age: '23'}).then(function(res) {
-        $scope.user = res;
+        $scope.user = User.item;
+        $scope.$digest();
       }).catch(function(err) {
         console.log(err);
       });
@@ -103,6 +116,7 @@ var main = function(app) {
 
     $scope.resetCriteria = function() {
       User.getAll().then(function() {
+        $scope.$digest();
       }).catch(function(err) {
         console.log(err);
       });
@@ -114,6 +128,10 @@ var main = function(app) {
 
     $scope.linkUserWithAddresses = function(item) {
       Address.linkItem(item, 'Addresses', {});
+    };
+
+    $scope.linkUsersWithAddresses = function() {
+      User.linkModel(Address, 'Addresses', {});
     };
 
     $scope.findAddressByBuilding = function() {

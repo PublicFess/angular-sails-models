@@ -2,7 +2,6 @@ var fetch = function(adapter, model) {
   return function() {
     return adapter.get(model.url, model.criteriaAll)
     .then(function(res) {
-      model._lastFetchAll = new Date();
       _.remove(model.items, function() {
         return true;
       });

@@ -52,8 +52,11 @@ describe('Get Actions', function() {
 
   it('should get 2 user by 23 age', function() {
     element(by.css('.find_by_age')).click();
-    var count_element = element.all(by.css('.users tr')).count();
-    expect(count_element).to.eventually.equal(2);
+    browser.sleep(200).then(function() {
+      var count_element = element.all(by.css('.users tr')).count();
+      expect(count_element).to.eventually.equal(2);
+    });
+
   });
 
   it('should get first user by 23 age', function() {

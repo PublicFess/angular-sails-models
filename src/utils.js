@@ -1,25 +1,23 @@
-var isEqual = require('lodash.isequal');
-
-exports.changeCriteriaAll = function(model, criteria) {
-  var skip = isEqual(model.criteriaAll, criteria);
-  if (skip) return;
-  model.criteriaAll = criteria;
-  model._lastChangeCriteriaAll = new Date();
-};
-
-exports.changeCriteriaOne = function(model, criteria) {
-  var skip = isEqual(model.criteriaOne, criteria);
-  if (skip) return;
-  model.criteriaOne = criteria;
-  model._lastChangeCriteriaOne = new Date();
-};
-
 Array.prototype.joinWith = function(array) {
   var self = this;
   if (!array || !array.length) return;
   array.forEach(function(item) {
     self.push(item);
   });
+};
+
+var isEqual = require('lodash.isequal');
+
+exports.changeCriteriaAll = function(model, criteria) {
+  model.criteriaAll = criteria;
+};
+
+exports.changeCriteriaOne = function(model, criteria) {
+  model.criteriaOne = criteria;
+};
+
+exports.changeCriteriaCached = function(model, criteria) {
+  model.criteriaCached = criteria;
 };
 
 exports.checkCriteria = function(item, criteria) {
@@ -47,19 +45,16 @@ exports.checkCriteria = function(item, criteria) {
   return result;
 };
 
-exports.checkAllCriteria = function(model, item) {
-  var criteria = model.criteriaAll;
-  var result = true;
-  result = exports.checkCriteria(item, criteria);
-  return result;
-};
-
 exports.helpFind = function(criteria) {
   var criteria = criteria;
   return function(o) {
     var skip = false;
     for (var i in criteria) {
       if (!criteria.hasOwnProperty(i)) return;
+      if (!criteria[i]) {
+        skip = true;
+        continue;
+      }
       if (o[i].toString() != criteria[i].toString()) {
         skip = true;
       }

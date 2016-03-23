@@ -1,6 +1,6 @@
 {
   "name": "angular-sails-models",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Angular models for work with sails and sails sockets",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,8 @@
     "lodash": "^4.6.0",
     "sails": "^0.12.1",
     "sails.io.js": "^0.13.6",
-    "socket.io-client": "^1.4.5"
+    "socket.io-client": "^1.4.5",
+    "randomstring": "*"
   },
   "devDependencies": {
     "browser-sync": "^2.10.0",
