@@ -41,6 +41,7 @@ var BaseModel = function(url, adapter) {
   Model.getAll = require('./model_methods/getAll')(Model);
   Model.fetchOne = require('./model_methods/fetchOne')(adapter, Model);
   Model.fetchOneById = require('./model_methods/fetchOneById')(adapter, Model);
+  Model.fetchOneByUrl = require('./model_methods/fetchOneByUrl')(adapter, Model);
   Model.getOne = require('./model_methods/getOne')(Model);
   Model.getOneById = require('./model_methods/getOneById')(Model);
   Model.populate = require('./model_methods/populate')();
