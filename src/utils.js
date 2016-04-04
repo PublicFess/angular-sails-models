@@ -37,6 +37,9 @@ exports.checkCriteria = function(item, criteria) {
         if (key == '$in') {
           result = criteria[i][key].indexOf(item[i]) > -1;
         };
+        if (key == '$lt') {
+          result = item[i] < criteria[i][key];
+        };
         break;
       default:
         break;

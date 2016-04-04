@@ -33,7 +33,8 @@ var BaseModel = function(url, adapter) {
     criteriaOne: {},
 
     _associations: [],
-    _modelAssociations: []
+    _modelAssociations: [],
+    _populations: []
   };
 
   Model.cache = require('./model_methods/cache')(adapter, Model);
@@ -45,6 +46,7 @@ var BaseModel = function(url, adapter) {
   Model.getOne = require('./model_methods/getOne')(Model);
   Model.getOneById = require('./model_methods/getOneById')(Model);
   Model.populate = require('./model_methods/populate')();
+  Model.populateModel = require('./model_methods/populateModel')(Model);
   Model.linkItem = require('./model_methods/linkItem')(Model);
   Model.linkModel = require('./model_methods/linkModel')(Model);
 
