@@ -39,7 +39,7 @@ var destroyed = function(criteria) {
     return items.indexOf(item) > -1;
   });
   _.remove(self.cached, function(item) {
-    return _.find(items, helpFind({id: item.id}));
+    return items.indexOf(item) > -1;
   });
   if (self.item && checkDestroyCriteria(self.item, criteria)) {
     for (var i in self.item) {

@@ -1,6 +1,6 @@
 {
   "name": "angular-sails-models",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Angular models for work with sails and sails sockets",
   "main": "index.js",
   "scripts": {

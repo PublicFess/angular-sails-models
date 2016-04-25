@@ -1,6 +1,7 @@
 var checkCriteria = require('../utils').checkCriteria
   , processingItemAssociation = require('../model_methods/_processingItemAssociation')
-  , processingModelAssociation = require('../model_methods/_processingModelAssociation');
+  , processingModelAssociation = require('../model_methods/_processingModelAssociation')
+  , processingPopulate = require('../model_methods/_processingPopulate');
 
 var created = function(data) {
   if (!data.length) data = [data];
@@ -17,6 +18,9 @@ var created = function(data) {
     });
     self._modelAssociations.forEach(function(a) {
       processingModelAssociation([item], a);
+    });
+    self._populations.forEach(function(a) {
+      processingPopulate(self, a);
     });
   });
 
