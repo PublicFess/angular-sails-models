@@ -28,6 +28,9 @@ exports.checkCriteria = function(item, criteria) {
       case 'string':
         result = criteria[i] == item[i];
         break;
+      case 'number':
+        result = criteria[i] == item[i];
+        break;
       case 'object':
         if (criteria[i] == null) {
           result = criteria[i] == item[i];
