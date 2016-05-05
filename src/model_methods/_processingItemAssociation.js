@@ -21,7 +21,6 @@ var processingAssociation = function(items, association) {
       existing = li;
       return;
     };
-
     item[value] = item[value] || [];
     item[value].push(li);
   });

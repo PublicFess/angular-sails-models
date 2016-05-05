@@ -11,7 +11,10 @@ var linkItem = function(model) {
     var exist = _.find(associations, function(a) {
       return a.item.id == item.id;
     });
-    if (exist) return;
+    if (exist) {
+      processingItemAssociation(model.cached, exist);
+      return;
+    }
     var id = rs.generate(12);
     associations.push({
       id: id,

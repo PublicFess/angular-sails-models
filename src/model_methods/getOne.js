@@ -8,6 +8,7 @@ var getOne = function(model) {
     if (model.cached.length && !force) {
       return Promise.resolve().then(function() {
         model.item = find(model.cached, helpFind(model.criteriaOne));
+
         return model.item;
       });
     }

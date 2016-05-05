@@ -11,14 +11,17 @@ var linkModel = function(model) {
     var exist = _.find(associations, function(a) {
       return a.model.url = linkedModel.url;
     });
-    if (exist) return;
+    if (exist) {
+      processingModelAssociation(model.cached, exist);
+      return;
+    };
     associations.push({
       model: linkedModel,
       value: value,
       criteria: criteria
     });
     var association = associations[associations.length-1];
-    processingModelAssociation(model.items, association);
+    processingModelAssociation(model.cached, association);
   };
 };
 

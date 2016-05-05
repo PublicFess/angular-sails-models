@@ -10,9 +10,9 @@ var cache = function(adapter, model) {
     }
 
     changeCriteriaCached(model, criteria);
-
-    return adapter.get(model.url, criteria)
-    .then(function(res) {
+    return Promise.resolve().then(function() {
+      return adapter.get(model.url, criteria);
+    }).then(function(res) {
       _.remove(model.cached, function() {
         return true;
       });
